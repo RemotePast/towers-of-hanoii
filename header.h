@@ -1,16 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-enum Location { first = 1, second, third };
 
-void begin(sf::RenderWindow&);
-void info(sf::RenderWindow&);
-bool menu(sf::RenderWindow&);
-void setup(sf::RenderWindow&);
-int game_loop(sf::RenderWindow&);
-void draw_field(sf::RenderWindow&);
-void gameover(sf::RenderWindow&, int);
-void Game(sf::RenderWindow&);
+void begin(sf::RenderWindow&); // начальный экран
+void info(sf::RenderWindow&); // раздел "правила игры"
+bool menu(sf::RenderWindow&); // главное меню
+void setup(sf::RenderWindow&);  // выбор количества дисков
+int game_loop(sf::RenderWindow&); // игровой цикл
+void draw_field(sf::RenderWindow&); // отрисовка поля
+void gameover(sf::RenderWindow&, int); // окончание игры
+void Game(sf::RenderWindow&); // сама игра
+
+enum Location { first = 1, second, third };
 
 class Disk
 {
@@ -83,8 +84,8 @@ public:
 private:
 	float m_width = 150.0;
 	float m_height = 20.0;
-	int m_number;
-	float m_posx, m_posy;
+	int m_number = -1;
+	float m_posx = -1, m_posy = -1;
 	bool m_state = false; //диск по умолчанию закрыт, нельзя подвинуть
 	Location m_location = first; //на каком шесте находится сейчас, по умолчанию на первом
 	sf::RectangleShape m_rectangle;

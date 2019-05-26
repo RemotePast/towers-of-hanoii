@@ -37,9 +37,9 @@ void begin(sf::RenderWindow& window)
 	sprite.setTexture(title);
 	sf::Clock clock;
 	float time = 0;
-	while (window.isOpen() && (time <= 3))
+	while (window.isOpen() && (time <= 3)) // показываем начальный экран в течении 3 секунд
 	{
-		time = clock.getElapsedTime().asSeconds(); //дать прошедшее врем€ в микросекундах
+		time = clock.getElapsedTime().asSeconds(); // берем прошедшее врем€ в микросекундах
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -80,25 +80,25 @@ void info(sf::RenderWindow& window)
 			{
 				window.close();
 			}
-			if ((next.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)))
+			if ((next.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y))))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
 					next.setFillColor(sf::Color(47, 3, 3));
 				else
 				{
 					if (ind < 2)
-						sprite.setTexture(pages[++ind]);
+						sprite.setTexture(pages[++ind]);  // переключаем страницу
 					sf::sleep(sf::seconds(0.3f));
 				}
 			}
-			else if ((goback.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) && (ind == 2))
+			else if ((goback.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y))) && (ind == 2))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
 					goback.setFillColor(sf::Color::Red);
 				else
 				{
 					sf::sleep(sf::seconds(0.3f));
-					return;
+					return; 
 				}
 			}
 			else
@@ -142,22 +142,22 @@ bool menu(sf::RenderWindow & window)
 		sf::Event event;
 		while ((window.pollEvent(event)) && (isMenu))
 		{
-			menuNum = 0;
+			menuNum = 0; // хранит выбор раздела меню пользователем
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();
 			}
-			if (newgame.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			if (newgame.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				newgame.setFillColor(sf::Color(47, 3, 3));
 				menuNum = 1;
 			}
-			else if (rules.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (rules.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				rules.setFillColor(sf::Color(47, 3, 3));
 				menuNum = 2;
 			}
-			else if (exit.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (exit.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				exit.setFillColor(sf::Color(47, 3, 3));
 				menuNum = 3;
@@ -170,16 +170,16 @@ bool menu(sf::RenderWindow & window)
 			}
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-				if (menuNum == 1)
+				if (menuNum == 1) // переходим к выбору количества дисков
 				{
 					isMenu = false;
 					return false;
 				}
-				else if (menuNum == 2)
+				else if (menuNum == 2)  // переход к правилам игры
 				{
 					return true;
 				}
-				else if (menuNum == 3)
+				else if (menuNum == 3) // если закрыли окно игры
 				{
 					isMenu = false;
 					window.close();
@@ -234,32 +234,33 @@ void setup(sf::RenderWindow & window)
 			{
 				window.close();
 			}
-			if (three.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			if (three.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				three.setFillColor(sf::Color(47, 3, 3));
 				n = std::stoi(static_cast<std::string>(three.getString()));
+                // считываю количество, которое выбрал пользователь
 			}
-			else if (four.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (four.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				four.setFillColor(sf::Color(47, 3, 3));
 				n = std::stoi(static_cast<std::string>(four.getString()));
 			}
-			else if (five.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (five.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				five.setFillColor(sf::Color(47, 3, 3));
 				n = std::stoi(static_cast<std::string>(five.getString()));
 			}
-			else if (six.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (six.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				six.setFillColor(sf::Color(47, 3, 3));
 				n = std::stoi(static_cast<std::string>(six.getString()));
 			}
-			else if (seven.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (seven.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				seven.setFillColor(sf::Color(47, 3, 3));
 				n = std::stoi(static_cast<std::string>(seven.getString()));
 			}
-            else if (eight.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+            else if (eight.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
             {
                 eight.setFillColor(sf::Color(47, 3, 3));
                 n = std::stoi(static_cast<std::string>(eight.getString()));
@@ -294,11 +295,10 @@ void setup(sf::RenderWindow & window)
 
 int game_loop(sf::RenderWindow & window)
 {
-	//int swaps = 0;
-	Disk* disks = new Disk[n];
-	std::vector<Disk> first_stick;
-	std::vector<Disk> second_stick;
-	std::vector<Disk> third_stick;
+	Disk* disks = new Disk[n]; // массив дисков
+	std::vector<Disk> first_stick; // диски на первом стержне 
+	std::vector<Disk> second_stick; // диски на втором стержне
+	std::vector<Disk> third_stick; // диски на третьем стержне
 	sf::Font font;
 	font.loadFromFile("font.otf");
 	sf::Text stick1("1", font, 70);
@@ -343,9 +343,9 @@ int game_loop(sf::RenderWindow & window)
     struct LastSwap
     {
         int number = 0;	// номер хода
-        Location from = first;
-        Location  to;
-        bool available = false;
+        Location from = first; // откуда переставл€ли
+        Location  to = first; // куда переставили
+        bool available = false; // можно ли отменить ход
     };
 	for (int i = 0; i < n; i++)
 	{
@@ -374,16 +374,16 @@ int game_loop(sf::RenderWindow & window)
 			{
 				return lastSwap.number;
 			}
-			if (goback.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			if (goback.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
 				  if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
 					  goback.setFillColor(sf::Color(47, 3, 3));
-				  else { return -1; }
+                  else { return -1; } // вернутьс€ в главное меню
 			}
 			else
 				goback.setFillColor(sf::Color::White);
 
-			if ((arrow11.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			if ((arrow11.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				&& (!first_stick.empty()) && ((third_stick.empty()) || (third_stick.back().get_width() > first_stick.back().get_width())))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -404,7 +404,7 @@ int game_loop(sf::RenderWindow & window)
 						first_stick.back().set_state(true);
 				}
 			}
-			else if ((arrow12.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if ((arrow12.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				&& (!first_stick.empty()) && ((second_stick.empty()) || (second_stick.back().get_width() > first_stick.back().get_width())))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -426,7 +426,7 @@ int game_loop(sf::RenderWindow & window)
 				}
 			}
 
-			else if ((arrow21.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if ((arrow21.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				&& (!second_stick.empty()) && ((first_stick.empty()) || (first_stick.back().get_width() > second_stick.back().get_width())))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -447,7 +447,7 @@ int game_loop(sf::RenderWindow & window)
 				}
 			}
 
-			else if ((arrow22.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if ((arrow22.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				&& (!second_stick.empty()) && ((third_stick.empty()) || (third_stick.back().get_width() > second_stick.back().get_width())))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -468,7 +468,7 @@ int game_loop(sf::RenderWindow & window)
 				}
 			}
 
-			else if ((arrow31.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if ((arrow31.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				&& (!third_stick.empty()) && ((second_stick.empty()) || (second_stick.back().get_width() > third_stick.back().get_width())))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -489,7 +489,7 @@ int game_loop(sf::RenderWindow & window)
 				}
 			}
 
-			else if ((arrow32.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if ((arrow32.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				&& (!third_stick.empty()) && ((first_stick.empty()) || (first_stick.back().get_width() > third_stick.back().get_width())))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -510,17 +510,17 @@ int game_loop(sf::RenderWindow & window)
 						first_stick.back().set_state(true);
 				}
 			}
-			else if (arrow11.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (arrow11.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				arrow11.setFillColor(sf::Color::Red);
-			else if (arrow12.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (arrow12.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				arrow12.setFillColor(sf::Color::Red);
-			else if (arrow21.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (arrow21.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				arrow21.setFillColor(sf::Color::Red);
-			else if (arrow22.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (arrow22.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				arrow22.setFillColor(sf::Color::Red);
-			else if (arrow31.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (arrow31.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				arrow31.setFillColor(sf::Color::Red);
-			else if (arrow32.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+			else if (arrow32.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 				arrow32.setFillColor(sf::Color::Red);
 			else
 			{
@@ -531,7 +531,7 @@ int game_loop(sf::RenderWindow & window)
 				arrow31.setFillColor(sf::Color::White);
 				arrow32.setFillColor(sf::Color::White);
 			}
-            if (arrowBackwards.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+            if (arrowBackwards.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
             {
                 if ((!lastSwap.available) && (!sf::Mouse::isButtonPressed(sf::Mouse::Left)))
                     arrowBackwards.setTexture(texture3);
@@ -627,8 +627,8 @@ int game_loop(sf::RenderWindow & window)
 		}
 		window.clear();
 		draw_field(window);
-		for (auto element : first_stick)
-			window.draw(element.get_disk());
+		for (auto element : first_stick) // пройтись по всем дискам, лежащим на первом стержне
+			window.draw(element.get_disk()); 
 		for (auto element : second_stick)
 			window.draw(element.get_disk());
 		for (auto element : third_stick)
@@ -642,7 +642,7 @@ int game_loop(sf::RenderWindow & window)
 		window.draw(stick1);
 		window.draw(stick2);
 		window.draw(stick3);
-		swapsText.setString(gameSwapsString.str());
+		swapsText.setString(gameSwapsString.str()); 
 		window.draw(text);
 		window.draw(swapsText);
 		window.draw(goback);
@@ -654,7 +654,7 @@ int game_loop(sf::RenderWindow & window)
 
 void gameover(sf::RenderWindow & window, int swaps)
 {
-	if (swaps == -1)
+	if (swaps == -1) // выйти в главное меню
 		return;
 	sf::Texture fone;
 	sf::Sprite sprite;
@@ -665,7 +665,7 @@ void gameover(sf::RenderWindow & window, int swaps)
 	sf::Text congrats(L"“џ ћќЋќƒ≈÷ :)", font, 80);
 	sf::Text goback(L"¬ернутьс€ в меню", font, 50);
 	sf::Text minSwapsString(L"ћинимальное количество перестановок: ", font, 30);
-	sf::Text numberMinSwaps(std::to_string(int(std::pow(2,n)) - 1), font, 50);
+	sf::Text numberMinSwaps(std::to_string(int(std::pow(2,n)) - 1), font, 50);  // минимальное кол-во перестановок
 	sf::Text playerSwapsString(L"“ы сделал всего перестановок: ", font, 30);
 	sf::Text numberPlayerSwaps(std::to_string(swaps), font, 50);
 	congrats.setPosition(85, 60);
@@ -688,7 +688,7 @@ void gameover(sf::RenderWindow & window, int swaps)
 			{
 				window.close();
 			}
-			else if ((goback.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)))
+			else if ((goback.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y))))
 			{
 				if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
 					goback.setFillColor(sf::Color(47, 3, 3));
