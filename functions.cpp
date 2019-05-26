@@ -210,18 +210,21 @@ void setup(sf::RenderWindow & window)
 	sf::Text five("5", font, 80);
 	sf::Text six("6", font, 80);
 	sf::Text seven("7", font, 80);
+    sf::Text eight("8", font, 80);
 	question.setPosition(25, 130);
-	three.setPosition(20, 220);
+	three.setPosition(60, 220);
 	four.setPosition(160, 220);
-	five.setPosition(300, 220);
-	six.setPosition(440, 220);
-	seven.setPosition(580, 220);
+	five.setPosition(260, 220);
+	six.setPosition(360, 220);
+	seven.setPosition(460, 220);
+    eight.setPosition(560, 220);
 	question.setFillColor(sf::Color::Black);
 	three.setFillColor(sf::Color::White);
 	four.setFillColor(sf::Color::White);
 	five.setFillColor(sf::Color::White);
 	six.setFillColor(sf::Color::White);
 	seven.setFillColor(sf::Color::White);
+    eight.setFillColor(sf::Color::White);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -256,6 +259,11 @@ void setup(sf::RenderWindow & window)
 				seven.setFillColor(sf::Color(47, 3, 3));
 				n = std::stoi(static_cast<std::string>(seven.getString()));
 			}
+            else if (eight.getGlobalBounds().contains(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+            {
+                eight.setFillColor(sf::Color(47, 3, 3));
+                n = std::stoi(static_cast<std::string>(eight.getString()));
+            }
 			else
 			{
 				n = 0;
@@ -264,6 +272,7 @@ void setup(sf::RenderWindow & window)
 				five.setFillColor(sf::Color::White);
 				six.setFillColor(sf::Color::White);
 				seven.setFillColor(sf::Color::White);
+                eight.setFillColor(sf::Color::White);
 			}
 			if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (n != 0))
 			{
@@ -278,6 +287,7 @@ void setup(sf::RenderWindow & window)
 		window.draw(five);
 		window.draw(six);
 		window.draw(seven);
+        window.draw(eight);
 		window.display();
 	}
 }
@@ -340,7 +350,7 @@ int game_loop(sf::RenderWindow & window)
 	for (int i = 0; i < n; i++)
 	{
 		first_stick.push_back(disks[i]);
-		first_stick.back().get_disk().setFillColor(sf::Color((120 + i * 20), (50 + i * 20), (0 + i * 20)));
+		first_stick.back().get_disk().setFillColor(sf::Color((120 + i * 15), (50 + i * 15), (0 + i * 15)));
 		first_stick.back().set_number(i);
 		first_stick[i].set_position();
 		first_stick[i].set_size(i);
@@ -525,7 +535,7 @@ int game_loop(sf::RenderWindow & window)
             {
                 if ((!lastSwap.available) && (!sf::Mouse::isButtonPressed(sf::Mouse::Left)))
                     arrowBackwards.setTexture(texture3);
-                else
+                else if (lastSwap.available)
                 {
                     if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
                         arrowBackwards.setTexture(texture2);

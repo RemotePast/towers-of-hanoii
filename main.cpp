@@ -16,7 +16,7 @@ int main()
 		|| (!font.loadFromFile("font.otf")))
 	{ return 1; }
 	else
-		window.setIcon(16, 16, icon.getPixelsPtr());
+		window.setIcon(64, 64, icon.getPixelsPtr());
 	window.setFramerateLimit(90);
 	Game(window);
 	return 0;
