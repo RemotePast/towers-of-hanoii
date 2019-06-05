@@ -1,6 +1,4 @@
 ﻿  functions.cpp
-  main.cpp
-  Создание кода...
 C:\Users\Remote Past\source\repos\towers of hanoii\functions.cpp(197): warning C4715: menu: значение возвращается не при всех путях выполнения
-C:\Users\Remote Past\source\repos\towers of hanoii\functions.cpp(652): warning C4715: game_loop: значение возвращается не при всех путях выполнения
+C:\Users\Remote Past\source\repos\towers of hanoii\functions.cpp(653): warning C4715: game_loop: значение возвращается не при всех путях выполнения
   towers of hanoii.vcxproj -> C:\Users\Remote Past\source\repos\towers of hanoii\Debug\towers of hanoii.exe

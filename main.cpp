@@ -17,7 +17,7 @@ int main()
 	{ return 1; }
 	else
 		window.setIcon(64, 64, icon.getPixelsPtr());
-	window.setFramerateLimit(90);
+	window.setFramerateLimit(120);
 	Game(window);
 	return 0;
 }

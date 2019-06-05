@@ -10,12 +10,12 @@ void draw_field(sf::RenderWindow& window)
 	sf::Sprite sprite;
 	fone.loadFromFile("images/fone2.png");
 	sprite.setTexture(fone);
-	sf::RectangleShape desk(sf::Vector2f(600, 30));
+	sf::RectangleShape desk(sf::Vector2f(640, 45));
 	sf::RectangleShape stick1(sf::Vector2f(5, 300));
 	sf::RectangleShape stick2(sf::Vector2f(5, 300));
 	sf::RectangleShape stick3(sf::Vector2f(5, 300));
 	desk.setFillColor(sf::Color(47, 3, 3));
-	desk.setPosition(20, 440);
+	desk.setPosition(0, 440);
 	stick1.setFillColor(sf::Color::Black);
 	stick2.setFillColor(sf::Color::Black);
 	stick3.setFillColor(sf::Color::Black);
@@ -118,7 +118,7 @@ void info(sf::RenderWindow& window)
 }
 
 
-bool menu(sf::RenderWindow & window)
+bool menu(sf::RenderWindow &window)
 {
 	sf::Texture fone;
 	sf::Sprite sprite;
@@ -142,7 +142,7 @@ bool menu(sf::RenderWindow & window)
 		sf::Event event;
 		while ((window.pollEvent(event)) && (isMenu))
 		{
-			menuNum = 0; // хранит выбор раздела меню пользователем
+			menuNum = 0; // выбор раздела меню пользователем
 			if (event.type == sf::Event::Closed)
 			{
 				window.close();
@@ -154,7 +154,7 @@ bool menu(sf::RenderWindow & window)
 			}
 			else if (rules.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
-				rules.setFillColor(sf::Color(47, 3, 3));
+                rules.setFillColor(sf::Color::White);
 				menuNum = 2;
 			}
 			else if (exit.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
@@ -179,7 +179,7 @@ bool menu(sf::RenderWindow & window)
 				{
 					return true;
 				}
-				else if (menuNum == 3) // если закрыли окно игры
+				else if (menuNum == 3) // если нажали выход
 				{
 					isMenu = false;
 					window.close();
@@ -238,7 +238,7 @@ void setup(sf::RenderWindow & window)
 			{
 				three.setFillColor(sf::Color(47, 3, 3));
 				n = std::stoi(static_cast<std::string>(three.getString()));
-                // считываю количество, которое выбрал пользователь
+                // считываю количество дисков, которое выбрал пользователь
 			}
 			else if (four.getGlobalBounds().contains(float(sf::Mouse::getPosition(window).x), float(sf::Mouse::getPosition(window).y)))
 			{
@@ -312,6 +312,7 @@ int game_loop(sf::RenderWindow & window)
 	texture3.loadFromFile("images/escapere.png");
 	sf::Sprite arrowBackwards;
 	arrowBackwards.setTexture(texture1);
+    arrowBackwards.setColor(sf::Color::White);
 	arrowBackwards.setPosition(280, 10);
 	stick1.setPosition(120, 62);
 	stick2.setPosition(310, 65);
@@ -321,12 +322,12 @@ int game_loop(sf::RenderWindow & window)
 	stick3.setFillColor(sf::Color::Black);
 	sf::Text text(L"Сделано\nПерестановок: ", font, 30);
 	sf::Text swapsText("", font, 60);
-	sf::Text arrow11("3", font, 50);
-	sf::Text arrow12("2", font, 55);
-	sf::Text arrow21("1", font, 60);
-	sf::Text arrow22("3", font, 50);
-	sf::Text arrow31("2", font, 55);
-	sf::Text arrow32("1", font, 60);
+	sf::Text arrow11("->3", font, 40);
+	sf::Text arrow12("->2", font, 40);
+	sf::Text arrow21("->1", font, 40);
+	sf::Text arrow22("->3", font, 40);
+	sf::Text arrow31("->2", font, 40);
+	sf::Text arrow32("->1", font, 40);
 	sf::Text goback(L"Вернуться в меню", font, 30);
 	goback.setPosition(400, 5);
 	goback.setFillColor(sf::Color::White);
@@ -334,12 +335,12 @@ int game_loop(sf::RenderWindow & window)
 	swapsText.setPosition(190, 13);
 	text.setFillColor(sf::Color::Black);
 	swapsText.setFillColor(sf::Color::Black);
-	arrow11.setPosition(90, 410);
-	arrow12.setPosition(135, 408);
-	arrow21.setPosition(290, 403);
-	arrow22.setPosition(335, 410);
-	arrow31.setPosition(490, 408);
-	arrow32.setPosition(535, 403);
+	arrow11.setPosition(50, 430);
+	arrow12.setPosition(130, 430);
+	arrow21.setPosition(250, 430);
+	arrow22.setPosition(330, 430);
+	arrow31.setPosition(450, 430);
+	arrow32.setPosition(530, 430);
     struct LastSwap
     {
         int number = 0;	// номер хода
@@ -541,7 +542,7 @@ int game_loop(sf::RenderWindow & window)
                         arrowBackwards.setTexture(texture2);
                     else 
                     {
-                        arrowBackwards.setTexture(texture1);
+                        arrowBackwards.setTexture(texture1); //отмена хода
                         lastSwap.available = false;
                         lastSwap.number--;
                         if (lastSwap.to == first)
