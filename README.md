@@ -1,2 +1,2 @@
 # towers-of-hanoii
-my university's first-year course project
+my first-year course project
